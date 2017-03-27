@@ -1,1 +1,1 @@
-This is an iOS app for studying swift using TwitterAPI
+This is the iOS app for studying swift using TwitterAPI
