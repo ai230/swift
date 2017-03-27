@@ -16,6 +16,10 @@
 		410AB7151E857FD600E2563B /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410AB7141E857FD600E2563B /* Tweet.swift */; };
 		410AB7171E85824D00E2563B /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410AB7161E85824D00E2563B /* TimelineViewController.swift */; };
 		410AB7191E858B7500E2563B /* TweetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410AB7181E858B7500E2563B /* TweetTableViewCell.swift */; };
+		410AB7211E88426200E2563B /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410AB7201E88426200E2563B /* Account.swift */; };
+		410AB7231E88454000E2563B /* LoginCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410AB7221E88454000E2563B /* LoginCommunicator.swift */; };
+		410AB7251E8853E300E2563B /* TwitterCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410AB7241E8853E300E2563B /* TwitterCommunicator.swift */; };
+		410AB7271E8887F800E2563B /* TimelineParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410AB7261E8887F800E2563B /* TimelineParser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +34,10 @@
 		410AB7141E857FD600E2563B /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
 		410AB7161E85824D00E2563B /* TimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineViewController.swift; sourceTree = "<group>"; };
 		410AB7181E858B7500E2563B /* TweetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetTableViewCell.swift; sourceTree = "<group>"; };
+		410AB7201E88426200E2563B /* Account.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
+		410AB7221E88454000E2563B /* LoginCommunicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginCommunicator.swift; sourceTree = "<group>"; };
+		410AB7241E8853E300E2563B /* TwitterCommunicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterCommunicator.swift; sourceTree = "<group>"; };
+		410AB7261E8887F800E2563B /* TimelineParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineParser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +80,10 @@
 				410AB70C1E857E1000E2563B /* Info.plist */,
 				410AB7161E85824D00E2563B /* TimelineViewController.swift */,
 				410AB7181E858B7500E2563B /* TweetTableViewCell.swift */,
+				410AB7201E88426200E2563B /* Account.swift */,
+				410AB7221E88454000E2563B /* LoginCommunicator.swift */,
+				410AB7241E8853E300E2563B /* TwitterCommunicator.swift */,
+				410AB7261E8887F800E2563B /* TimelineParser.swift */,
 			);
 			path = DotsSwiftTwitterClient;
 			sourceTree = "<group>";
@@ -149,11 +161,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				410AB7031E857E1000E2563B /* ViewController.swift in Sources */,
+				410AB7271E8887F800E2563B /* TimelineParser.swift in Sources */,
 				410AB7011E857E1000E2563B /* AppDelegate.swift in Sources */,
 				410AB7131E857EB500E2563B /* User.swift in Sources */,
+				410AB7251E8853E300E2563B /* TwitterCommunicator.swift in Sources */,
 				410AB7151E857FD600E2563B /* Tweet.swift in Sources */,
+				410AB7231E88454000E2563B /* LoginCommunicator.swift in Sources */,
 				410AB7171E85824D00E2563B /* TimelineViewController.swift in Sources */,
 				410AB7191E858B7500E2563B /* TweetTableViewCell.swift in Sources */,
+				410AB7211E88426200E2563B /* Account.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

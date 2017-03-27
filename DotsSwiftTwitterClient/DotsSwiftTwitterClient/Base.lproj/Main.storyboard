@@ -76,6 +76,7 @@
                                                 <constraint firstItem="ARd-dh-RgX" firstAttribute="top" secondItem="eQP-xX-v2Q" secondAttribute="bottom" id="zZv-6E-nwR"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.40000000600000002" green="1" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <outlet property="iconImageView" destination="fRf-Qa-ac6" id="qnh-pz-DkL"/>
                                             <outlet property="nameLabel" destination="eQP-xX-v2Q" id="clc-Jj-rKO"/>

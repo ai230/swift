@@ -15,40 +15,47 @@ class TimelineViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
+        //set (self = TimelineViewController)
         tableView.delegate = self
-        // dataSourceの指定を自分自身(self = TimelineViewController)に設定
         tableView.dataSource = self
         
-        // create test data
-        let user = User(id: "1", screenName: "ktanaka117", name: "ダンボー田中", profileImageURL: "https://pbs.twimg.com/profile_images/832034247414206464/PCKoQRPD.jpg")
-        let tweet = Tweet(id: "01", text: "Twitterクライアント作成なう", user: user)
+        LoginCommunicator().login() { isSuccess in
+            switch isSuccess {
+            case false:
+                print("Login Faild")
+            case true:
+                print("Login Success")
+                
+                //call TwitterCommunicator.swift
+                TwitterCommunicator().getTimeline() { [weak self] data, error in
         
-        let tweets = [tweet]
-        self.tweets = tweets
-        
-        // tableViewのリロード
-        tableView.reloadData()
-        
+                    if let error = error {
+                        print(error)
+                        return
+                    }
+                    
+                    print(data)
+                    //TimelineParser
+                    let timelineParser = TimelineParser()
+                    let tweets = timelineParser.parse(data: data!)
+                    
+                    print(tweets)
+                    
+                    self?.tweets = tweets
+                    
+                    DispatchQueue.main.async {
+                        self?.tableView.reloadData()
+                    }
+                }
+            }
+        }
     }
-        override func didReceiveMemoryWarning() {
+    override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
-
 extension TimelineViewController:UITableViewDelegate {
     //when the cell is tapped
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -73,10 +80,13 @@ extension TimelineViewController: UITableViewDataSource {
         return tweets.count
     }
     
-    // 描画するcellを設定する関数
+    //for TweetTableViewCell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // TweetTableViewCellを表示したいので、TweetTableViewCellを取得
+        //get "TweetTableViewCell"
         let cell = tableView.dequeueReusableCell(withIdentifier: "TweetTableViewCell") as! TweetTableViewCell
+        
+        // call fill and taks tweet
+        cell.fill(tweet: tweets[indexPath.row])
         
         return cell
     }
