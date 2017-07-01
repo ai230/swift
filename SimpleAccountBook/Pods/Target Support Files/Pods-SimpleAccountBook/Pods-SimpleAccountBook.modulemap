@@ -1,0 +1,6 @@
+framework module Pods_SimpleAccountBook {
+  umbrella header "Pods-SimpleAccountBook-umbrella.h"
+
+  export *
+  module * { export * }
+}

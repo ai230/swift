@@ -1,0 +1,415 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		17F2AE8907E89023CB66A9E4 /* Pods_SimpleAccountBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BABB0F8BA4A906266AF23683 /* Pods_SimpleAccountBook.framework */; };
+		413EE3BD1F064171008CD6F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413EE3BC1F064171008CD6F9 /* AppDelegate.swift */; };
+		413EE3BF1F064171008CD6F9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413EE3BE1F064171008CD6F9 /* ViewController.swift */; };
+		413EE3C21F064171008CD6F9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 413EE3C01F064171008CD6F9 /* Main.storyboard */; };
+		413EE3C41F064171008CD6F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 413EE3C31F064171008CD6F9 /* Assets.xcassets */; };
+		413EE3C71F064171008CD6F9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 413EE3C51F064171008CD6F9 /* LaunchScreen.storyboard */; };
+		413EE3CF1F064337008CD6F9 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413EE3CE1F064337008CD6F9 /* CustomCell.swift */; };
+		413EE3D11F06435E008CD6F9 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413EE3D01F06435E008CD6F9 /* CalendarViewController.swift */; };
+		413EE3D71F06590C008CD6F9 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413EE3D61F06590C008CD6F9 /* TabBarViewController.swift */; };
+		413EE3D91F065BE7008CD6F9 /* BalanceEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413EE3D81F065BE7008CD6F9 /* BalanceEntryViewController.swift */; };
+		4171148B1F06C4A20081AA02 /* BalanceEntryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4171148A1F06C4A20081AA02 /* BalanceEntryTableViewCell.swift */; };
+		4171148D1F06F4510081AA02 /* Balance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4171148C1F06F4510081AA02 /* Balance.swift */; };
+		4171148F1F0736C80081AA02 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4171148E1F0736C80081AA02 /* GoogleService-Info.plist */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		376DD0B6D9D6AFB69601A376 /* Pods-SimpleAccountBook.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimpleAccountBook.release.xcconfig"; path = "Pods/Target Support Files/Pods-SimpleAccountBook/Pods-SimpleAccountBook.release.xcconfig"; sourceTree = "<group>"; };
+		413EE3B91F064171008CD6F9 /* SimpleAccountBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleAccountBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		413EE3BC1F064171008CD6F9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		413EE3BE1F064171008CD6F9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		413EE3C11F064171008CD6F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		413EE3C31F064171008CD6F9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		413EE3C61F064171008CD6F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		413EE3C81F064171008CD6F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		413EE3CE1F064337008CD6F9 /* CustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
+		413EE3D01F06435E008CD6F9 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		413EE3D61F06590C008CD6F9 /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		413EE3D81F065BE7008CD6F9 /* BalanceEntryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalanceEntryViewController.swift; sourceTree = "<group>"; };
+		4171148A1F06C4A20081AA02 /* BalanceEntryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalanceEntryTableViewCell.swift; sourceTree = "<group>"; };
+		4171148C1F06F4510081AA02 /* Balance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Balance.swift; sourceTree = "<group>"; };
+		4171148E1F0736C80081AA02 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A61B97EB1F652907139403B6 /* Pods-SimpleAccountBook.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimpleAccountBook.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SimpleAccountBook/Pods-SimpleAccountBook.debug.xcconfig"; sourceTree = "<group>"; };
+		BABB0F8BA4A906266AF23683 /* Pods_SimpleAccountBook.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SimpleAccountBook.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		413EE3B61F064171008CD6F9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				17F2AE8907E89023CB66A9E4 /* Pods_SimpleAccountBook.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		413EE3B01F064171008CD6F9 = {
+			isa = PBXGroup;
+			children = (
+				413EE3BB1F064171008CD6F9 /* SimpleAccountBook */,
+				413EE3BA1F064171008CD6F9 /* Products */,
+				68E05AD49CF2F5AC526D588A /* Pods */,
+				E95186377CA34BEB5B2A463E /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		413EE3BA1F064171008CD6F9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				413EE3B91F064171008CD6F9 /* SimpleAccountBook.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		413EE3BB1F064171008CD6F9 /* SimpleAccountBook */ = {
+			isa = PBXGroup;
+			children = (
+				413EE3D61F06590C008CD6F9 /* TabBarViewController.swift */,
+				413EE3BC1F064171008CD6F9 /* AppDelegate.swift */,
+				413EE3BE1F064171008CD6F9 /* ViewController.swift */,
+				413EE3C01F064171008CD6F9 /* Main.storyboard */,
+				4171148A1F06C4A20081AA02 /* BalanceEntryTableViewCell.swift */,
+				413EE3D81F065BE7008CD6F9 /* BalanceEntryViewController.swift */,
+				413EE3CE1F064337008CD6F9 /* CustomCell.swift */,
+				413EE3D01F06435E008CD6F9 /* CalendarViewController.swift */,
+				4171148C1F06F4510081AA02 /* Balance.swift */,
+				413EE3C31F064171008CD6F9 /* Assets.xcassets */,
+				413EE3C51F064171008CD6F9 /* LaunchScreen.storyboard */,
+				413EE3C81F064171008CD6F9 /* Info.plist */,
+				4171148E1F0736C80081AA02 /* GoogleService-Info.plist */,
+			);
+			path = SimpleAccountBook;
+			sourceTree = "<group>";
+		};
+		68E05AD49CF2F5AC526D588A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A61B97EB1F652907139403B6 /* Pods-SimpleAccountBook.debug.xcconfig */,
+				376DD0B6D9D6AFB69601A376 /* Pods-SimpleAccountBook.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		E95186377CA34BEB5B2A463E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BABB0F8BA4A906266AF23683 /* Pods_SimpleAccountBook.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		413EE3B81F064171008CD6F9 /* SimpleAccountBook */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 413EE3CB1F064171008CD6F9 /* Build configuration list for PBXNativeTarget "SimpleAccountBook" */;
+			buildPhases = (
+				FECD7DD2C86BB5298C435EDC /* [CP] Check Pods Manifest.lock */,
+				413EE3B51F064171008CD6F9 /* Sources */,
+				413EE3B61F064171008CD6F9 /* Frameworks */,
+				413EE3B71F064171008CD6F9 /* Resources */,
+				40351F0EB65BF1BCB4ABBA52 /* [CP] Embed Pods Frameworks */,
+				068559173CCC67AAE5EE5C46 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SimpleAccountBook;
+			productName = SimpleAccountBook;
+			productReference = 413EE3B91F064171008CD6F9 /* SimpleAccountBook.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		413EE3B11F064171008CD6F9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = "Ai Yamamoto";
+				TargetAttributes = {
+					413EE3B81F064171008CD6F9 = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = Y23F6SFGXW;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 413EE3B41F064171008CD6F9 /* Build configuration list for PBXProject "SimpleAccountBook" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 413EE3B01F064171008CD6F9;
+			productRefGroup = 413EE3BA1F064171008CD6F9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				413EE3B81F064171008CD6F9 /* SimpleAccountBook */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		413EE3B71F064171008CD6F9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				413EE3C71F064171008CD6F9 /* LaunchScreen.storyboard in Resources */,
+				4171148F1F0736C80081AA02 /* GoogleService-Info.plist in Resources */,
+				413EE3C41F064171008CD6F9 /* Assets.xcassets in Resources */,
+				413EE3C21F064171008CD6F9 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		068559173CCC67AAE5EE5C46 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SimpleAccountBook/Pods-SimpleAccountBook-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		40351F0EB65BF1BCB4ABBA52 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SimpleAccountBook/Pods-SimpleAccountBook-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FECD7DD2C86BB5298C435EDC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		413EE3B51F064171008CD6F9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				413EE3D11F06435E008CD6F9 /* CalendarViewController.swift in Sources */,
+				413EE3BF1F064171008CD6F9 /* ViewController.swift in Sources */,
+				413EE3CF1F064337008CD6F9 /* CustomCell.swift in Sources */,
+				413EE3D91F065BE7008CD6F9 /* BalanceEntryViewController.swift in Sources */,
+				413EE3D71F06590C008CD6F9 /* TabBarViewController.swift in Sources */,
+				4171148B1F06C4A20081AA02 /* BalanceEntryTableViewCell.swift in Sources */,
+				4171148D1F06F4510081AA02 /* Balance.swift in Sources */,
+				413EE3BD1F064171008CD6F9 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		413EE3C01F064171008CD6F9 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				413EE3C11F064171008CD6F9 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		413EE3C51F064171008CD6F9 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				413EE3C61F064171008CD6F9 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		413EE3C91F064171008CD6F9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		413EE3CA1F064171008CD6F9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		413EE3CC1F064171008CD6F9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A61B97EB1F652907139403B6 /* Pods-SimpleAccountBook.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = Y23F6SFGXW;
+				INFOPLIST_FILE = SimpleAccountBook/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = aiyamamoto.SimpleAccountBook;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		413EE3CD1F064171008CD6F9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 376DD0B6D9D6AFB69601A376 /* Pods-SimpleAccountBook.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = Y23F6SFGXW;
+				INFOPLIST_FILE = SimpleAccountBook/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = aiyamamoto.SimpleAccountBook;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		413EE3B41F064171008CD6F9 /* Build configuration list for PBXProject "SimpleAccountBook" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				413EE3C91F064171008CD6F9 /* Debug */,
+				413EE3CA1F064171008CD6F9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		413EE3CB1F064171008CD6F9 /* Build configuration list for PBXNativeTarget "SimpleAccountBook" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				413EE3CC1F064171008CD6F9 /* Debug */,
+				413EE3CD1F064171008CD6F9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 413EE3B11F064171008CD6F9 /* Project object */;
+}
