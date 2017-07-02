@@ -16,7 +16,7 @@ class BalanceEntryViewController: ViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var dateLbl: UILabel!
     @IBOutlet weak var tableView: UITableView!
 //    var balanceArray: [Balance]?
-    var balanceArray: [Balance]? = nil
+//    var balanceArray: [Balance]? = nil
     var myList:[String] = []
     var selectedDate = Date()
     let navColor = UIColor(red:0.40, green:0.60, blue:0.40, alpha:1.0)
@@ -25,7 +25,7 @@ class BalanceEntryViewController: ViewController, UITableViewDelegate, UITableVi
     let cellName = ["AmountCell", "CategoryCell", "AccountCell", "MemoCell"]
     
     var ref:FIRDatabaseReference?
-    var handle:FIRDatabaseHandle?
+//    var handle:FIRDatabaseHandle?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +37,7 @@ class BalanceEntryViewController: ViewController, UITableViewDelegate, UITableVi
         
         dateLbl.text = convertDateToString(date: selectedDate);
         
-        readDatabase()
+//        readDatabase()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -45,37 +45,6 @@ class BalanceEntryViewController: ViewController, UITableViewDelegate, UITableVi
         cell.amountTxt.becomeFirstResponder()
     }
     
-    func readDatabase() {
-        var selectedDateStr:String = ""
-        var amount:String = ""
-        var category:String = ""
-        var account:String = ""
-        var memo:String = ""
-        
-        ref = FIRDatabase.database().reference()
-        handle = ref?.child("list").observe(.childAdded, with: { (snapshot) in
-            if let item = snapshot.value as? [String:AnyObject]
-            {
-                for (key, value) in item {
-                    print("\(key) -> \(value)")
-                    if key == "date" {
-                        selectedDateStr = value as! String
-                    }else if key == "account" {
-                        account = value as! String
-                    }else if key == "amount" {
-                        amount = value as! String
-                    }else if key == "category" {
-                        category = value as! String
-                    }else if key == "memo" {
-                        memo = value as! String
-                    }
-                }
-                
-                let balance = Balance(selectedDate: selectedDateStr, amount: Double(amount)!, category: category, account: account, memo: memo)
-                self.balanceArray?.append(balance)
-            }
-        })
-    }
     
     func convertDateToString(date:Date) -> String{
         let formatter = DateFormatter()
@@ -92,10 +61,6 @@ class BalanceEntryViewController: ViewController, UITableViewDelegate, UITableVi
         return 1
     }
     
-//    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-//        return cellName.count
-//    }
-//    
     func numberOfSections(in tableView: UITableView) -> Int {
         return cellName.count
     }
@@ -134,7 +99,6 @@ class BalanceEntryViewController: ViewController, UITableViewDelegate, UITableVi
         
         uploadDate()
 //        clearDate()
-        navigationController?.popViewController(animated: true)
     }
     
     func uploadDate() {
@@ -144,33 +108,38 @@ class BalanceEntryViewController: ViewController, UITableViewDelegate, UITableVi
         var account:String = ""
         var memo:String = ""
         
-        var i:Int = 0
-        while i < cellName.count {
-            let cell: BalanceEntryTableViewCell = self.tableView.cellForRow(at: IndexPath(row: 0, section: i)) as! BalanceEntryTableViewCell
-            
-            if i == 0 {
-                amount = cell.amountTxt.text!
-            }else if i == 1 {
-                category = cell.CategoryLbl.text!
-            }else if i == 2 {
-                account = cell.AccountLbl.text!
-            }else {
-                memo = cell.memoTxt.text!
+        
+            var i:Int = 0
+            while i < cellName.count {
+                let cell: BalanceEntryTableViewCell = self.tableView.cellForRow(at: IndexPath(row: 0, section: i)) as! BalanceEntryTableViewCell
+                
+                if i == 0 {
+                    amount = cell.amountTxt.text!
+                }else if i == 1 {
+                    category = cell.CategoryLbl.text!
+                }else if i == 2 {
+                    account = cell.AccountLbl.text!
+                }else {
+                    memo = cell.memoTxt.text!
+                }
+                i = i + 1
             }
-            i = i + 1
-        }
-        selectedDateStr = convertDateToString(date: selectedDate)
+            selectedDateStr = convertDateToString(date: selectedDate)
         
-        let post = ["date": selectedDateStr,
-                    "amount": amount,
-                    "category": category,
-                    "account": account,
-                    "memo": memo] as [String : Any]
-        
-        ref?.child("list").childByAutoId().setValue(post)
-        
+        if amount != "" {
+            if memo == "" {
+                memo = "None"
+            }
+            let post = ["date": selectedDateStr,
+                        "amount": amount,
+                        "category": category,
+                        "account": account,
+                        "memo": memo] as [String : Any]
+            
+            ref?.child("list").childByAutoId().setValue(post)
+            navigationController?.popViewController(animated: true)
 
-        
+        }
 //        let balance = Balance(selectedDate: selectedDate, amount: Double(amount)!, category: category, account: account, memo: memo)
 //        balanceArray?.append(balance)
     }
@@ -193,4 +162,15 @@ class BalanceEntryViewController: ViewController, UITableViewDelegate, UITableVi
             i = i + 1
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "CategoryID" {
+//            let balanceEntryVC = segue.destination as! BalanceEntryViewController
+//            balanceEntryVC.selectedDate = selectedDate
+        } else if segue.identifier == "AccountID" {
+            //            let balanceEntryVC = segue.destination as! BalanceEntryViewController
+            //            balanceEntryVC.selectedDate = selectedDate
+        }
+    }
+    
 }

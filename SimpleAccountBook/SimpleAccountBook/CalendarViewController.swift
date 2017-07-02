@@ -8,13 +8,21 @@
 
 import UIKit
 import JTAppleCalendar
+import FirebaseDatabase
 
-class CalendarViewController: UIViewController {
+class CalendarViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    @IBOutlet weak var tableView: UITableView!
+    
     @IBOutlet weak var calendarView: JTAppleCalendarView!
+
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
     
     @IBOutlet weak var year: UILabel!
     @IBOutlet weak var month: UILabel!
     
+    var ref:FIRDatabaseReference?
+    var handle:FIRDatabaseHandle?
     var balanceArray: [Balance]? = nil
     let currentDate = Date()
     
@@ -33,6 +41,8 @@ class CalendarViewController: UIViewController {
     
     let formatter = DateFormatter()
     
+    var numOfdata:Int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //Setup calendar spacing
@@ -42,6 +52,12 @@ class CalendarViewController: UIViewController {
         calendarView.visibleDates { (visibleDates) in
             self.setupViewOfCalendar(from: visibleDates)
         }
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        //For segment
+        tableView.isHidden = true
+        calendarView.isHidden = false
         
         getCurrentDay()
         calendarView.scrollToDate(currentDate)
@@ -49,7 +65,43 @@ class CalendarViewController: UIViewController {
         navigationController?.navigationBar.barTintColor = navColor
         currentDateStr = convertDateToString(date: currentDate)
         balanceArray = [Balance]()
+        
+        readDatabase()
     }
+    
+    func readDatabase() {
+        var selectedDateStr:String = ""
+        var amount:String = ""
+        var category:String = ""
+        var account:String = ""
+        var memo:String = ""
+        
+        ref = FIRDatabase.database().reference()
+        handle = ref?.child("list").observe(.childAdded, with: { (snapshot) in
+            if let item = snapshot.value as? [String:AnyObject]
+            {
+                for (key, value) in item {
+                    print("\(key) -> \(value)")
+                    if key == "date" {
+                        selectedDateStr = value as! String
+                    }else if key == "account" {
+                        account = value as! String
+                    }else if key == "amount" {
+                        amount = value as! String
+                    }else if key == "category" {
+                        category = value as! String
+                    }else if key == "memo" {
+                        memo = value as! String
+                    }
+                    self.numOfdata += 1
+                }
+                
+                let balance = Balance(selectedDate: selectedDateStr, amount: Double(amount)!, category: category, account: account, memo: memo)
+                self.balanceArray?.append(balance)
+            }
+        })
+    }
+
     
     func convertDateToString(date:Date) -> String{
         let formatter = DateFormatter()
@@ -124,6 +176,22 @@ class CalendarViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func didSegmentSelected(_ sender: Any) {
+        switch segmentedControl.selectedSegmentIndex
+        {
+        case 0:
+            tableView.isHidden = true
+            calendarView.isHidden = false
+        case 1:
+            tableView.isHidden = false
+            calendarView.isHidden = true
+            tableView.reloadData()
+        default:
+            break;
+        }
+
+    }
+    
     @IBAction func goEntryBtn(_ sender: Any) {
         performSegue(withIdentifier: "BalanceEntrySegue", sender: nil)
     }
@@ -132,11 +200,47 @@ class CalendarViewController: UIViewController {
         if segue.identifier == "BalanceEntrySegue" {
             let balanceEntryVC = segue.destination as! BalanceEntryViewController
             balanceEntryVC.selectedDate = selectedDate
-            balanceEntryVC.balanceArray = balanceArray
+//            balanceEntryVC.balanceArray = balanceArray
         }
+    }
+
+    //TableView for List
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return (balanceArray?.count)!
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ListTableCell", for: indexPath) as? ListCustomCell  else {
+            fatalError("The dequeued cell is not an instance of MealTableViewCell.")
+        }
+        
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "ListTableCell", for: indexPath)
+        
+        
+        cell.amountLblForList.text = String(format:"%.1f", (self.balanceArray?[indexPath.row].amount)!)
+        cell.accountLblForList.text = self.balanceArray?[indexPath.row].account
+        cell.categoryLblForList.text = self.balanceArray?[indexPath.row].category
+        
+        cell.imageView?.image = UIImage(named: "FoofImg")
+
+        return cell
+    }
+    
+    func tableView(table: UITableView, didSelectRowAtIndexPath indexPath:IndexPath) {
+        print("click")
+    }
+    
+    //Height of Cell
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
     }
     
 }
+//CalendarViewController end
 
 extension CalendarViewController: JTAppleCalendarViewDataSource{
     func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters {
@@ -169,10 +273,10 @@ extension CalendarViewController: JTAppleCalendarViewDelegate{
         
         //Mark currentday
         if(year == self.currentYear && month == self.currentMonth && day == self.currentDay){
-//            cell.dateLabel.textColor = UIColor.red
-            cell.layer.borderWidth = 2.0
-            cell.layer.cornerRadius = 0.5 * cell.bounds.size.width
-            cell.layer.borderColor = UIColor.gray.cgColor
+            cell.todayView.isHidden = false
+//            cell.selectedView.layer.cornerRadius = 0.5 * cell.selectedView.bounds.size.width
+        }else{
+            cell.todayView.isHidden = true
         }
         return cell
     }
