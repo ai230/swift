@@ -21,9 +21,26 @@ class CalendarViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var year: UILabel!
     @IBOutlet weak var month: UILabel!
     
+    
+
+    
+//    private let myiPhoneItems: NSArray = ["iOS8", "iOS7", "iOS6", "iOS5", "iOS4"]
+//    private let myAndroidItems: NSArray = ["5.x", "4.x", "2.x", "1.x"]
+    
+    // Sectionで使用する配列を定義する.
+//    private let mySections: NSArray = ["iPhone", "Android"]
+    let bBC = BalanceEntryViewController()
     var ref:FIRDatabaseReference?
     var handle:FIRDatabaseHandle?
-    var balanceArray: [Balance]? = nil
+    var balanceArray: [Balance] = []
+    var totalAmount = 0.0
+    var totalAmounts:[Double] = []
+    var dataInSection: [[Balance]] = []
+    var sectionIndex:[String] = []
+    
+//    var sectionArray = [[Balance]]()
+    
+//    var Datesections: [String] = ["2017/07/01", "2017/07/02"]
     let currentDate = Date()
     
     var currentDateStr = ""
@@ -45,6 +62,10 @@ class CalendarViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        ref = FIRDatabase.database().reference()
+        readDatabase()
+        
         //Setup calendar spacing
         setupCalendarView()
         
@@ -54,6 +75,11 @@ class CalendarViewController: UIViewController, UITableViewDelegate, UITableView
         }
         tableView.delegate = self
         tableView.dataSource = self
+        
+//        let headerView = UIView()
+//        headerView.backgroundColor = UIColor.blue
+//        headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 50 )
+//        tableView.tableHeaderView = headerView
         
         //For segment
         tableView.isHidden = true
@@ -66,8 +92,20 @@ class CalendarViewController: UIViewController, UITableViewDelegate, UITableView
         currentDateStr = convertDateToString(date: currentDate)
         balanceArray = [Balance]()
         
-        readDatabase()
+//        sectionArray = [myCoatItems, myJyacketItems]
+//        sectionIndex = [String]()
+        
+        
     }
+    
+//    override func viewDidAppear(_ animated: Bool) {
+//        print("viewDidAppear!!")
+//        calendarView.reloadData()
+//    }
+//    
+//    override func viewWillAppear(_ animated: Bool) {
+//        calendarView.reloadData()
+//    }
     
     func readDatabase() {
         var selectedDateStr:String = ""
@@ -75,8 +113,8 @@ class CalendarViewController: UIViewController, UITableViewDelegate, UITableView
         var category:String = ""
         var account:String = ""
         var memo:String = ""
-        
-        ref = FIRDatabase.database().reference()
+        var isSameDate:Bool = false
+    
         handle = ref?.child("list").observe(.childAdded, with: { (snapshot) in
             if let item = snapshot.value as? [String:AnyObject]
             {
@@ -94,15 +132,33 @@ class CalendarViewController: UIViewController, UITableViewDelegate, UITableView
                         memo = value as! String
                     }
                     self.numOfdata += 1
+                    
+                }
+
+                
+                for item in self.sectionIndex{
+                    if item == selectedDateStr {
+                        isSameDate = true
+                        break
+                    }
+                }
+                if isSameDate == false {
+                    self.sectionIndex.append(selectedDateStr)
+                }else{
+                    isSameDate = false
                 }
                 
+                
                 let balance = Balance(selectedDate: selectedDateStr, amount: Double(amount)!, category: category, account: account, memo: memo)
-                self.balanceArray?.append(balance)
+                self.balanceArray.append(balance)
+
             }
         })
+        self.calendarView.reloadData()
+        print("calendarview reload")
+        self.tableView.reloadData()
     }
 
-    
     func convertDateToString(date:Date) -> String{
         let formatter = DateFormatter()
         // initially set the format based on your datepicker date
@@ -142,6 +198,39 @@ class CalendarViewController: UIViewController, UITableViewDelegate, UITableView
         }
         
     }
+//    func handleCellTotalAmount(view: JTAppleCell?, cellState: CellState, date: Date) {
+//        guard let validCell = view as? CustomCell else {
+//            return }
+//        
+//        if sectionIndex.count != 0 {
+//            let d = convertDateToString(date: date)
+//            for i in 0...sectionIndex.count-1 {
+//                if d == sectionIndex[i] {
+//                    let total = String(format:"%.2f", totalAmounts[i])
+//                    validCell.totalAmountLabel.text = "$\(total)"
+//                    validCell.totalAmountLabel.textColor = UIColor.yellow
+//                    print("yes\(date) \(total)")
+//                }else {
+//                    validCell.totalAmountLabel.text = ""
+//                    print("no\(date)")
+//
+//                }
+//            }
+//        }
+
+//        
+//        if cellState.isSelected {
+//            validCell.dateLabel.textColor = selectedMonthColor
+//        } else {
+//            if cellState.dateBelongsTo == .thisMonth {
+//                validCell.dateLabel.textColor = monthColor
+//            }else{
+//                validCell.dateLabel.textColor = outsideMonthColor
+//            }
+//        }
+        
+  //  }
+
     
     //when cell is clicked
     func handleCellSelected(view: JTAppleCell?, cellState: CellState) {
@@ -182,14 +271,36 @@ class CalendarViewController: UIViewController, UITableViewDelegate, UITableView
         case 0:
             tableView.isHidden = true
             calendarView.isHidden = false
+            calTotalAmount()
+//            calendarView.reloadData()
         case 1:
             tableView.isHidden = false
             calendarView.isHidden = true
+//            dataInSection.removeAll()
+//            sectionIndex.removeAll()
+//            balanceArray.removeAll()
+//            readDatabase()
             tableView.reloadData()
+            
         default:
             break;
         }
+    }
+    //Caluculate total amount
+    func calTotalAmount(){
+        for i in 0...dataInSection.count-1 {
+            for j in 0...dataInSection[i].count-1 {
+                if j == 0 {
+                    totalAmount = 0.0
+                }
+                totalAmount += dataInSection[i][j].amount
+                
+                if j == dataInSection[i].count-1 {
+                    totalAmounts.insert(totalAmount, at: i)
+                }
 
+            }
+        }
     }
     
     @IBAction func goEntryBtn(_ sender: Any) {
@@ -200,37 +311,67 @@ class CalendarViewController: UIViewController, UITableViewDelegate, UITableView
         if segue.identifier == "BalanceEntrySegue" {
             let balanceEntryVC = segue.destination as! BalanceEntryViewController
             balanceEntryVC.selectedDate = selectedDate
-//            balanceEntryVC.balanceArray = balanceArray
+            balanceEntryVC.ref = ref
         }
     }
 
     //TableView for List
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (balanceArray?.count)!
+        if sectionIndex.count > 0 {
+            for j in 0...balanceArray.count-1 {
+                if sectionIndex[section] == balanceArray[j].selectedDate {
+                    self.dataInSection[autoAppendTo: section].append(balanceArray[j])
+                }
+            }
+        }
+        return dataInSection[section].count
     }
     
+    
+    //Number of Section
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return sectionIndex.count
     }
+    //Title of sections
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        totalAmount = 0.0
+        for index in 0...dataInSection[section].count-1 {
+            totalAmount += dataInSection[section][index].amount
+        }
+        let title = "\(sectionIndex[section]) Total:$\(totalAmount)"
+        return title
+    }
+
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ListTableCell", for: indexPath) as? ListCustomCell  else {
             fatalError("The dequeued cell is not an instance of MealTableViewCell.")
         }
-        
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "ListTableCell", for: indexPath)
-        
-        
-        cell.amountLblForList.text = String(format:"%.1f", (self.balanceArray?[indexPath.row].amount)!)
-        cell.accountLblForList.text = self.balanceArray?[indexPath.row].account
-        cell.categoryLblForList.text = self.balanceArray?[indexPath.row].category
-        
-        cell.imageView?.image = UIImage(named: "FoofImg")
 
+            cell.accountLblForList.text = dataInSection[indexPath.section][indexPath.row].account
+            cell.amountLblForList.text = String(format:"%.2f", dataInSection[indexPath.section][indexPath.row].amount)
+            cell.categoryLblForList.text = dataInSection[indexPath.section][indexPath.row].category
+
+        cell.imageView?.image = UIImage(named: "FoofImg")
+        
+        
+        
         return cell
     }
     
-    func tableView(table: UITableView, didSelectRowAtIndexPath indexPath:IndexPath) {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?{
+        let cell = tableView.dequeueReusableCell(withIdentifier: "HeaderCell")
+        
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 10
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath:IndexPath) {
         print("click")
     }
     
@@ -261,9 +402,29 @@ extension CalendarViewController: JTAppleCalendarViewDelegate{
     func calendar(_ calendar: JTAppleCalendarView, cellForItemAt date: Date, cellState: CellState, indexPath: IndexPath) -> JTAppleCell {
         let cell = calendar.dequeueReusableJTAppleCell(withReuseIdentifier: "CustomCell", for: indexPath) as! CustomCell
         cell.dateLabel.text = cellState.text
+        cell.totalAmountLabel.text = ""
+        print(date)
+        
+        //Show totalamount
+        if sectionIndex.count != 0 {
+            let d = convertDateToString(date: date)
+            for i in 0...sectionIndex.count-1 {
+                if d == sectionIndex[i] {
+                    let total = String(format:"%.2f", totalAmounts[i])
+                    cell.totalAmountLabel.text = "$\(total)"
+                    cell.totalAmountLabel.textColor = UIColor.yellow
+                    print("yes\(date) \(total)")
+                    break
+                }else {
+                    cell.totalAmountLabel.text = ""
+                    
+                }
+            }
+        }
         
         handleCellSelected(view: cell, cellState: cellState)
         handleCellTextColor(view: cell, cellState: cellState)
+//        handleCellTotalAmount(view: cell, cellState: cellState, date: date)
         
         let calendar = Calendar.current
         
@@ -297,9 +458,33 @@ extension CalendarViewController: JTAppleCalendarViewDelegate{
         setupViewOfCalendar(from: visibleDates)
         
     }
+    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "BalanceEntrySegue" {
+//        }
+//    }
 }
 
-
+extension Array where Element: ExpressibleByArrayLiteral {
+    
+    private mutating func append(to i: Int) {
+        while self.count <= i {
+            self.append([])
+        }
+    }
+    
+    subscript(autoAppendTo i: Int) -> Element {
+        mutating get {
+            self.append(to: i)
+            return self[i]
+        }
+        set {
+            self.append(to: i)
+            self[i] = newValue
+        }
+    }
+    
+}
 
 
 extension UIColor {

@@ -17,6 +17,7 @@
 		413EE3D11F06435E008CD6F9 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413EE3D01F06435E008CD6F9 /* CalendarViewController.swift */; };
 		413EE3D71F06590C008CD6F9 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413EE3D61F06590C008CD6F9 /* TabBarViewController.swift */; };
 		413EE3D91F065BE7008CD6F9 /* BalanceEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413EE3D81F065BE7008CD6F9 /* BalanceEntryViewController.swift */; };
+		416C7DA71F098AFB00DCB1E7 /* HeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416C7DA61F098AFB00DCB1E7 /* HeaderCell.swift */; };
 		4171148B1F06C4A20081AA02 /* BalanceEntryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4171148A1F06C4A20081AA02 /* BalanceEntryTableViewCell.swift */; };
 		4171148D1F06F4510081AA02 /* Balance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4171148C1F06F4510081AA02 /* Balance.swift */; };
 		4171148F1F0736C80081AA02 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4171148E1F0736C80081AA02 /* GoogleService-Info.plist */; };
@@ -40,6 +41,7 @@
 		413EE3D01F06435E008CD6F9 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		413EE3D61F06590C008CD6F9 /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		413EE3D81F065BE7008CD6F9 /* BalanceEntryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalanceEntryViewController.swift; sourceTree = "<group>"; };
+		416C7DA61F098AFB00DCB1E7 /* HeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderCell.swift; sourceTree = "<group>"; };
 		4171148A1F06C4A20081AA02 /* BalanceEntryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BalanceEntryTableViewCell.swift; sourceTree = "<group>"; };
 		4171148C1F06F4510081AA02 /* Balance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Balance.swift; sourceTree = "<group>"; };
 		4171148E1F0736C80081AA02 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 				417114901F088D380081AA02 /* ListCustomCell.swift */,
 				413EE3D01F06435E008CD6F9 /* CalendarViewController.swift */,
 				4171148C1F06F4510081AA02 /* Balance.swift */,
+				416C7DA61F098AFB00DCB1E7 /* HeaderCell.swift */,
 				413EE3C31F064171008CD6F9 /* Assets.xcassets */,
 				413EE3C51F064171008CD6F9 /* LaunchScreen.storyboard */,
 				413EE3C81F064171008CD6F9 /* Info.plist */,
@@ -271,6 +274,7 @@
 				413EE3D91F065BE7008CD6F9 /* BalanceEntryViewController.swift in Sources */,
 				417114911F088D380081AA02 /* ListCustomCell.swift in Sources */,
 				417114A11F0971390081AA02 /* AccountSelectionViewController.swift in Sources */,
+				416C7DA71F098AFB00DCB1E7 /* HeaderCell.swift in Sources */,
 				413EE3D71F06590C008CD6F9 /* TabBarViewController.swift in Sources */,
 				4171149B1F09623A0081AA02 /* CategorySelectionViewController.swift in Sources */,
 				4171148B1F06C4A20081AA02 /* BalanceEntryTableViewCell.swift in Sources */,
@@ -403,10 +407,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = Y23F6SFGXW;
 				INFOPLIST_FILE = SimpleAccountBook/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = aiyamamoto.SimpleAccountBook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -417,10 +423,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = Y23F6SFGXW;
 				INFOPLIST_FILE = SimpleAccountBook/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = aiyamamoto.SimpleAccountBook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

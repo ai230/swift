@@ -8,9 +8,15 @@
 
 import UIKit
 
+protocol AccountSelectionDelegate {
+    func didSelectedAccount(str:String)
+}
+
 class AccountSelectionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource  {
 
     @IBOutlet weak var accountTableView: UITableView!
+    
+    var delegate: AccountSelectionDelegate?
     
     var accountArray:[String] = ["Cash","Bank"]
     
@@ -44,8 +50,11 @@ class AccountSelectionViewController: UIViewController, UITableViewDelegate, UIT
         return cell
     }
     
-    func tableView(table: UITableView, didSelectRowAtIndexPath indexPath:IndexPath) {
-        print("click")
+    func tableView(_ table: UITableView, didSelectRowAt indexPath:IndexPath) {
+        //delegate give item to BalanceEntryView
+        delegate?.didSelectedAccount(str: accountArray[indexPath.row])
+        //close
+        navigationController?.popViewController(animated: true)
     }
     
     //Height of Cell

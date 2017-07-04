@@ -8,10 +8,14 @@
 
 import UIKit
 
+protocol CategorySelectionDelegate: class {
+    func didSelectedCategory(str:String)
+}
+
 class CategorySelectionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var categoryTableView: UITableView!
-    
+    var delegate: CategorySelectionDelegate?
     var categoryArray:[String] = ["Food","House","Income"]
     
     override func viewDidLoad() {
@@ -44,8 +48,11 @@ class CategorySelectionViewController: UIViewController, UITableViewDelegate, UI
         return cell
     }
     
-    func tableView(table: UITableView, didSelectRowAtIndexPath indexPath:IndexPath) {
-        print("click")
+    func tableView(_ table: UITableView, didSelectRowAt indexPath:IndexPath) {
+        //delegate give item to BalanceEntryView
+        delegate?.didSelectedCategory(str: categoryArray[indexPath.row])
+        //close
+        navigationController?.popViewController(animated: true)
     }
     
     //Height of Cell
