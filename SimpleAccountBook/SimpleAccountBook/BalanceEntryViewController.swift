@@ -10,14 +10,28 @@ import UIKit
 import FirebaseAuth
 import FirebaseDatabase
 
+protocol BalanceVCDelegate: class {
+    func didEditData() -> Balance
+    func isEditData() -> Bool
+    func doneEditData(balance: Balance)
+}
+
+
 class BalanceEntryViewController: ViewController, UITableViewDelegate, UITableViewDataSource {
     
     
     @IBOutlet weak var dateLbl: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
-    let categorySelectVC = CategorySelectionViewController()
-    let accountSelectVC = AccountSelectionViewController()
+//    let categorySelectVC = CategorySelectionViewController()
+//    let accountSelectVC = AccountSelectionViewController()
+    
+    var delegate5: BalanceVCDelegate?
+//    var editingAmount = ""
+//    var editingCategory = ""
+//    var editingAccount = ""
+//    var editing
+//    
     
     var myList:[String] = []
     var selectedDate = Date()
@@ -26,13 +40,21 @@ class BalanceEntryViewController: ViewController, UITableViewDelegate, UITableVi
     var selectedCategory = "Food"
     var selectedAccount = "Cash"
     var selectedMemo = ""
+    var selectedId = 0
+    var selectedKey = ""
+    var isEditingData: Bool = false
+    var editBalanceIndex = 0;
     
     let navColor = UIColor(red:0.40, green:0.60, blue:0.40, alpha:1.0)
     
     let cellName = ["AmountCell", "CategoryCell", "AccountCell", "MemoCell"]
     
     var ref:FIRDatabaseReference?
-    //    var handle:FIRDatabaseHandle?
+    var user: FIRUser!
+    
+    var editBalanceData:Balance? = nil
+//    var isEditingBalanceArrayOfIndex = 0
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,11 +67,26 @@ class BalanceEntryViewController: ViewController, UITableViewDelegate, UITableVi
         navigationController?.navigationBar.barTintColor = navColor
         
 //        ref = FIRDatabase.database().reference()
+//        user = FIRAuth.auth()?.currentUser
         
-        //        readDatabase()
+        isEditingData = (delegate5?.isEditData())!
+
+        if isEditingData == true {
+            editBalanceData = delegate5?.didEditData()
+            selectedKey = (editBalanceData?.balanceKey)!
+            selectedId = (editBalanceData?.balanceId)!
+            selectedDateStr = (editBalanceData?.selectedDate)!
+            selectedAmount = String(format:"%.2f",(editBalanceData?.amount)!)
+            selectedCategory = (editBalanceData?.category)!
+            selectedAccount = (editBalanceData?.account)!
+            selectedMemo = (editBalanceData?.memo)!
+        }
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        
+        
         tableView.reloadData()
         let cell: BalanceEntryTableViewCell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! BalanceEntryTableViewCell
         cell.amountTxt.becomeFirstResponder()
@@ -118,20 +155,22 @@ class BalanceEntryViewController: ViewController, UITableViewDelegate, UITableVi
     
     //Save Data to Balance class
     @IBAction func saveBtn(_ sender: Any) {
-        
-        updateDate()
-        writeDatebase()
+        if isEditingData == true {
+            updateDate()
+            writeDatebase()
+            let balance = Balance(balanceKey: selectedKey, balanceId: selectedId, selectedDate: selectedDateStr, amount: Double(selectedAmount)!, category: selectedCategory, account: selectedAccount, memo: selectedMemo)
+
+            delegate5?.doneEditData(balance: balance)
+            isEditingData = false
+            editBalanceData = nil
+        }else{
+            updateDate()
+            writeDatebase()
+        }
         navigationController?.popViewController(animated: true)
     }
     
     func updateDate() {
-        //        var selectedDateStr:String = ""
-        //        var amount:String = ""
-        //        var category:String = ""
-        //        var account:String = ""
-        //        var memo:String = ""
-        
-        
         var i:Int = 0
         while i < cellName.count {
             let cell: BalanceEntryTableViewCell = self.tableView.cellForRow(at: IndexPath(row: 0, section: i)) as! BalanceEntryTableViewCell
@@ -147,12 +186,6 @@ class BalanceEntryViewController: ViewController, UITableViewDelegate, UITableVi
             }
             i = i + 1
         }
-        //            selectedDateStr = convertDateToString(date: selectedDate)
-        
-        
-        //        }
-        //        let balance = Balance(selectedDate: selectedDate, amount: Double(amount)!, category: category, account: account, memo: memo)
-        //        balanceArray?.append(balance)
     }
     func writeDatebase() {
         
@@ -160,14 +193,19 @@ class BalanceEntryViewController: ViewController, UITableViewDelegate, UITableVi
             if selectedMemo == "" {
                 selectedMemo = "None"
             }
-//            ref = FIRDatabase.database().reference()
             let post = ["date": selectedDateStr,
                         "amount": selectedAmount,
                         "category": selectedCategory,
                         "account": selectedAccount,
                         "memo": selectedMemo] as [String : Any]
+
+            if isEditingData == true {
+                ref?.child("users").child(user.uid).child("items").child(selectedKey).updateChildValues(post)
+            }else{
+                ref?.child("users").child(user.uid).child("items").childByAutoId().updateChildValues(post)
+            }
             
-            ref?.child("list").childByAutoId().setValue(post)
+
         }
     }
     
@@ -193,7 +231,7 @@ class BalanceEntryViewController: ViewController, UITableViewDelegate, UITableVi
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "CategoryID" {
             let v = segue.destination as! CategorySelectionViewController
-            v.delegate = self
+            v.delegate7 = self
             
         } else if segue.identifier == "AccountID" {
             let v = segue.destination as! AccountSelectionViewController
@@ -204,7 +242,7 @@ class BalanceEntryViewController: ViewController, UITableViewDelegate, UITableVi
     
 }
 
-extension BalanceEntryViewController: CategorySelectionDelegate, AccountSelectionDelegate {
+extension BalanceEntryViewController: CategorySelectionDelegate, AccountSelectionDelegate  {
     func didSelectedCategory(str:String) {
         selectedCategory = str
     }
@@ -213,3 +251,20 @@ extension BalanceEntryViewController: CategorySelectionDelegate, AccountSelectio
         selectedAccount = str
     }
 }
+
+//extension BalanceEntryViewController:   {
+//    func didEditData() {
+////        selectedAmount = String(format:"%.2f",balance.amount)
+////        selectedCategory = balance.category
+////        selectedAccount = balance.account
+////        selectedMemo = balance.memo
+//    }
+//}
+
+//    func didEditData() {
+//        selectedAmount = String(format:"%.2f",b.amount)
+//        selectedCategory = b.category
+//        selectedAccount = b.account
+//        selectedMemo = b.memo
+//    }
+

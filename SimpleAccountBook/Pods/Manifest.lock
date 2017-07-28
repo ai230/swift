@@ -1,4 +1,7 @@
 PODS:
+  - Charts (3.0.2):
+    - Charts/Core (= 3.0.2)
+  - Charts/Core (3.0.2)
   - Firebase/Auth (3.16.0):
     - Firebase/Core
     - FirebaseAuth (= 3.1.1)
@@ -36,12 +39,14 @@ PODS:
   - JTAppleCalendar (7.0.1)
 
 DEPENDENCIES:
+  - Charts
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Database
   - JTAppleCalendar (~> 7.0)
 
 SPEC CHECKSUMS:
+  Charts: 236d6ccdd0ce6feae151d89e829a7397381a21fd
   Firebase: 21bf4a89d3f01bfbe11adc3a5d934a4a3d3a5fd6
   FirebaseAnalytics: 920e46455f27b0a52a80907a6d9b73ee4bd1c635
   FirebaseAuth: cc8a1824170adbd351edb7f994490a3fb5c18be6
@@ -52,6 +57,6 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 5c046c76a1f859bc9c187e918f18e4fc7bb57b5e
   JTAppleCalendar: 7c8cba3e06fd6fdfed72382eeeb87c304e727ddb
 
-PODFILE CHECKSUM: d607401872493284703616e34285b65c70a7105b
+PODFILE CHECKSUM: 753c6e4f30c1781bc56af57ebe28de74b9416587
 
 COCOAPODS: 1.2.1
