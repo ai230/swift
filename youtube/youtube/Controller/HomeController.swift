@@ -10,70 +10,13 @@ import UIKit
 
 class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
-//    var videos: [Video] = {
-//
-//        var youtubeChannel = Channel()
-//        youtubeChannel.name = "ThisIsTheBestChan----nel------"
-//        youtubeChannel.profileImageName = "youtube_profile"
-//
-//        var blankSpaceVideo = Video()
-//        blankSpaceVideo.thumbnailImageName = "thumbnail"
-//        blankSpaceVideo.title = "Taylor Swift - Blank Space"
-//        blankSpaceVideo.channel = youtubeChannel
-//        blankSpaceVideo.numberOfViews = 23967545
-//
-//        var badbloodVideo = Video()
-//        badbloodVideo.thumbnailImageName = "thumbnail2"
-//        badbloodVideo.title = "Taylor Swift - badblood featuring Kendrick Lamar"
-//        badbloodVideo.channel = youtubeChannel
-//        badbloodVideo.numberOfViews = 6783368
-//        return [blankSpaceVideo, badbloodVideo]
-//    }()
-
     var videos: [Video]?
     
     func fetchVideos() {
-    
-        let url = URL(string: "http://localhost/home.json")
-        
-        URLSession.shared.dataTask(with: url!) {
-                (data, response, error) in
-                if error != nil {
-                    print(error as Any)
-                    return
-                }
-            do {
-                let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
-                self.videos = [Video]()
-                for dictionary in json as! [[String: AnyObject]] {
-                    
-                    let video = Video()
-                    video.title = dictionary["title"] as? String
-                    video.thumbnailImageName = dictionary["thumbnail_image_name"] as? String
-                    
-                    let channelDictionary = dictionary["channel"] as? [String: AnyObject]
-                    let channel = Channel()
-                    channel.name = channelDictionary!["name"] as? String
-                    channel.profileImageName = channelDictionary!["profile_image_name"] as? String
-                    
-                    video.channel = channel
-                    
-                    self.videos?.append(video)
-                }
-                //get back on to a main UI thread and update UI(image)
-                DispatchQueue.main.async {
-                    self.collectionView?.reloadData()
-                }
-                
-            } catch let jsonError {
-                print(jsonError)
-            }
-            
-/* print josn string from restAPI*/
-//            let str = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
-//            print(str)
-            
-            }.resume()
+        ApiService.sharedInstance.fetchVideos { (videos: [Video]) in
+            self.videos = videos
+            self.collectionView?.reloadData()
+        }
     }
     
     override func viewDidLoad() {
@@ -111,11 +54,28 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         navigationItem.rightBarButtonItems = [moreButtonItem, searchBarButtonItem]
     }
 
-    let settingsLauncher = SettingsLauncher()
+    /* lazy ver - call once when 'settingsLauncher' is nil*/
+    //let settingsLauncher = SettingsLauncher()
+    //change to below bcz launcher.homeController need to be 'self'
+    lazy var settingsLauncher: SettingsLauncher = {
+        let launcher = SettingsLauncher()
+        launcher.homeController = self
+        return launcher
+    }()
     
     @objc func handleMore() {
         //show menu
         settingsLauncher.showSettings()
+    }
+    
+    //is called from SettingsLauncher class
+    func showControllerForSetting(setting: Setting) {
+        let dummySettingViewController = UIViewController()
+        dummySettingViewController.view.backgroundColor = UIColor.white
+        dummySettingViewController.navigationItem.title = setting.name
+        navigationController?.navigationBar.tintColor = UIColor.white
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+        navigationController?.pushViewController(dummySettingViewController, animated: true)
     }
     
     @objc func handleSearch() {
@@ -128,11 +88,21 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }()
     
     func setupMenuBar() {
+        navigationController?.hidesBarsOnSwipe = true
+        let redView = UIView()
+        redView.backgroundColor = UIColor.rgb(red: 230, green: 32, blue: 31)
+
+        view.addSubview(redView)
+        view.addConstaintsWithFormat(format: "H:|[v0]|", views: redView)
+        view.addConstaintsWithFormat(format: "V:[v0(50)]", views: redView)
+        
         view.addSubview(menuBar)
         view.backgroundColor = UIColor.blue
         view.addConstaintsWithFormat(format: "H:|[v0]|", views: menuBar)
         //here is a difference!
         view.addConstaintsWithFormat(format: "V:|-50-[v0(60)]", views: menuBar)
+        
+        menuBar.topAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

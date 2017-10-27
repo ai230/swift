@@ -18,6 +18,8 @@ class Setting: NSObject {
     }
 }
 
+let cancelName: String = "Cancel"
+
 class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     let cellId = "cellId"
@@ -29,7 +31,7 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
                 Setting(name: "Send FeedBack", imageName: "icon_feedback"),
                 Setting(name: "help", imageName: "icon_help"),
                 Setting(name: "Switch Account", imageName: "icon_switch"),
-                Setting(name: "Cancel", imageName: "icon_cancel")]
+                Setting(name: cancelName, imageName: "icon_cancel")]
     }()
     
     
@@ -42,12 +44,14 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
         return cv
     }()
     
+    var homeController: HomeController?
+    
     @objc func showSettings() {
         
         //window is the entire app window
         if let window = UIApplication.shared.keyWindow {
             
-            blackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hundleDismiss)))
+            blackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleDismiss)))
             
             blackView.backgroundColor = UIColor(white: 0, alpha: 0.5)
             
@@ -66,16 +70,27 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
                 self.blackView.alpha = 1
                 self.collectionView.frame = CGRect(x: 0, y: y, width: self.collectionView.frame.width, height: self.collectionView.frame.height)
             }, completion: nil)
-
         }
     }
     
-    @objc func hundleDismiss() {
-        UIView.animate(withDuration: 0.5) {
+    @objc func handleDismiss(setting: Setting) {
+        
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            
             self.blackView.alpha = 0
             
             if let window = UIApplication.shared.keyWindow {
                 self.collectionView.frame = CGRect(x: 0, y: window.frame.height, width: self.collectionView.frame.width, height: self.collectionView.frame.height)
+            }
+            
+        }) { (completed: Bool) in
+            
+            for item in self.settings {
+                if setting.name == item.name {
+                    if setting.name != cancelName {
+                    self.homeController?.showControllerForSetting(setting: setting)
+                    }
+                }
             }
         }
     }
@@ -99,6 +114,14 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
     //CollectionView has befalt space 10px each cell
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0 // set 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let setting = self.settings[indexPath.item]
+        handleDismiss(setting: setting)
+        
+       
     }
     
     override init() {

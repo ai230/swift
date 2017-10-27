@@ -35,8 +35,41 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
         //initialized home icon color white
         let selectedIndexPath = NSIndexPath(item: 0, section: 0)
         collectionView.selectItem(at: selectedIndexPath as IndexPath, animated: false, scrollPosition: [])
+        
+        setupHorizontalBar()
     }
     
+    var horizontalBarLeftAnchorConstraint: NSLayoutConstraint?
+    
+    func setupHorizontalBar() {
+        let horizontalBarView = UIView()
+        horizontalBarView.backgroundColor = UIColor(white: 0.9, alpha: 1)
+        horizontalBarView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(horizontalBarView)
+        
+        //old school frame way of doing things
+        //horizontalBarView.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
+
+        //new school
+        horizontalBarLeftAnchorConstraint = horizontalBarView.leftAnchor.constraint(equalTo: self.leftAnchor)
+        
+        horizontalBarLeftAnchorConstraint?.isActive = true
+        horizontalBarView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        //width of bar is 1/4
+        horizontalBarView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1/4).isActive = true
+        //height of bar
+        horizontalBarView.heightAnchor.constraint(equalToConstant: 3).isActive = true
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let x = CGFloat(indexPath.item) * frame.width
+        horizontalBarLeftAnchorConstraint?.constant = x/4
+        
+        //animate
+        UIView.animate(withDuration: 0.75, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.layoutIfNeeded()
+        }, completion: nil)
+    }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 4
     }
@@ -57,6 +90,7 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
         return 0
     }
     
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -74,7 +108,6 @@ class MenuCell: BaseCell {
     override var isHighlighted: Bool {
         didSet {
             imageView.tintColor = isHighlighted ? UIColor.white : UIColor.rgb(red: 91, green: 14, blue: 13)
-            print("hilight")
         }
     }
 
