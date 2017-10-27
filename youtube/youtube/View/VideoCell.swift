@@ -113,6 +113,7 @@ class VideoCell: BaseCell {
     var titleLabelHeightConstraint: NSLayoutConstraint?
     
     override func setupViews() {
+        
         addSubview(thumbnailImageView)
         addSubview(separatorView)
         addSubview(userProfileImageView)

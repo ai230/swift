@@ -23,6 +23,8 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
     let cellId = "cellId"
     let imageNames = ["menu1","menu2","menu3","menu4"]
     
+    var homeController: HomeController?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -65,10 +67,15 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
         let x = CGFloat(indexPath.item) * frame.width
         horizontalBarLeftAnchorConstraint?.constant = x/4
         
+        /*unnecessary becsuse scrollbar in homecontroller has pretty much same behaviour below
+         menuBar.horizontalBarLeftAnchorConstraint?.constant = scrollView.contentOffset.x / 4
+ 
         //animate
         UIView.animate(withDuration: 0.75, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.layoutIfNeeded()
-        }, completion: nil)
+        }, completion: nil)*/
+ 
+        homeController?.scrollToMenuIndex(menuIndex: indexPath.item)
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 4
