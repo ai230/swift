@@ -21,13 +21,13 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
     }()
     
     let cellId = "cellId"
-    let imageNames = ["menu1","menu2","menu3","menu4"]
+    let imageNames = ["home","trending","subscriptions","account"]
     
     var homeController: HomeController?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+//        view.contentInset = UIEdgeInsetsMake(50, 0, 0, 0)
         collectionView.register(MenuCell.self, forCellWithReuseIdentifier: cellId)
         
         addSubview(collectionView)
@@ -45,7 +45,7 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
     
     func setupHorizontalBar() {
         let horizontalBarView = UIView()
-        horizontalBarView.backgroundColor = UIColor(white: 0.9, alpha: 1)
+        horizontalBarView.backgroundColor = UIColor(white: 0.95, alpha: 1)
         horizontalBarView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(horizontalBarView)
         
@@ -97,7 +97,6 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
         return 0
     }
     
-    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -127,8 +126,7 @@ class MenuCell: BaseCell {
     override func setupViews() {
         super.setupViews()
 
-        backgroundColor = UIColor.rgb(red: 230, green: 32, blue: 31)
-
+//        backgroundColor = UIColor.rgb(red: 230, green: 32, blue: 31)
         addSubview(imageView)
         addConstaintsWithFormat(format: "H:[v0(28)]", views: imageView)
         addConstaintsWithFormat(format: "V:[v0(28)]", views: imageView)

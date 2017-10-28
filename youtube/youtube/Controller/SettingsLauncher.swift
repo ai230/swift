@@ -26,12 +26,12 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
     let cellHeight: CGFloat = 50
     
     let settings: [Setting] = {
-        return [Setting(name: "Settings", imageName: "icon_settings"),
-                Setting(name: "Termes & privacy policy", imageName: "icon-privacy"),
-                Setting(name: "Send FeedBack", imageName: "icon_feedback"),
-                Setting(name: "help", imageName: "icon_help"),
-                Setting(name: "Switch Account", imageName: "icon_switch"),
-                Setting(name: cancelName, imageName: "icon_cancel")]
+        return [Setting(name: "Settings", imageName: "settings"),
+                Setting(name: "Termes & privacy policy", imageName: "privacy"),
+                Setting(name: "Send FeedBack", imageName: "feedback"),
+                Setting(name: "help", imageName: "help"),
+                Setting(name: "Switch Account", imageName: "switch_account"),
+                Setting(name: cancelName, imageName: "cancel")]
     }()
     
     

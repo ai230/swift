@@ -79,8 +79,8 @@ class VideoCell: BaseCell {
     
     let userProfileImageView: CustomImageView = {
         let imageView = CustomImageView()
-        imageView.backgroundColor = UIColor.green
-        imageView.image = UIImage(named: "user")
+//        imageView.backgroundColor = UIColor.green
+        imageView.image = UIImage(named: "taylor_swift_profile")
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 22
         imageView.layer.masksToBounds = true

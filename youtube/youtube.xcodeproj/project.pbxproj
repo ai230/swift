@@ -16,6 +16,7 @@
 		413499351FA2AAED00EC14D1 /* SettingsLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413499341FA2AAED00EC14D1 /* SettingsLauncher.swift */; };
 		413499371FA2B32700EC14D1 /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413499361FA2B32700EC14D1 /* SettingCell.swift */; };
 		4134993C1FA3DC9C00EC14D1 /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4134993B1FA3DC9C00EC14D1 /* ApiService.swift */; };
+		4134993E1FA400EA00EC14D1 /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4134993D1FA400EA00EC14D1 /* FeedCell.swift */; };
 		4162CD9D1FA12687002D1E11 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4162CD9C1FA12687002D1E11 /* Extensions.swift */; };
 		4162CDA01FA1271A002D1E11 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4162CD9F1FA1271A002D1E11 /* VideoCell.swift */; };
 		4162CDA31FA12BAE002D1E11 /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4162CDA21FA12BAE002D1E11 /* MenuBar.swift */; };
@@ -34,6 +35,7 @@
 		413499341FA2AAED00EC14D1 /* SettingsLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLauncher.swift; sourceTree = "<group>"; };
 		413499361FA2B32700EC14D1 /* SettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
 		4134993B1FA3DC9C00EC14D1 /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
+		4134993D1FA400EA00EC14D1 /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 		4162CD9C1FA12687002D1E11 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		4162CD9F1FA1271A002D1E11 /* VideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
 		4162CDA21FA12BAE002D1E11 /* MenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 				4162CD9F1FA1271A002D1E11 /* VideoCell.swift */,
 				4162CDA21FA12BAE002D1E11 /* MenuBar.swift */,
 				413499361FA2B32700EC14D1 /* SettingCell.swift */,
+				4134993D1FA400EA00EC14D1 /* FeedCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -202,6 +205,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4122963F1F9F0FD0002DDD1C /* HomeController.swift in Sources */,
+				4134993E1FA400EA00EC14D1 /* FeedCell.swift in Sources */,
 				4162CDA61FA17A3C002D1E11 /* Video.swift in Sources */,
 				413499371FA2B32700EC14D1 /* SettingCell.swift in Sources */,
 				4162CDA01FA1271A002D1E11 /* VideoCell.swift in Sources */,
